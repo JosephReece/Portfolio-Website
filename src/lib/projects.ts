@@ -7,7 +7,7 @@ export interface Project {
 }
 
 export const projects: Record<string, Project> = {
-    flashMessagingApp: {
+    "flash-messaging": {
         title: "Flash Messaging",
         shortDescription: "A lightweight windows application for messaging locally on a network.",
         longDescription: `
@@ -19,7 +19,7 @@ export const projects: Record<string, Project> = {
         tags: ["Visual Basic .NET"],
         thumbnail: "https://picsum.photos/seed/projectAlpha/400/300",
     },
-    soarLearning: {
+    "soar-learning": {
         title: "Soar Learning",
         shortDescription: `
             An education platform designed for student pilots to learn

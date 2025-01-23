@@ -1,9 +1,11 @@
 <script lang="ts">
     // Import project data from an external file
     import { projects as projectData } from "$lib/projects"; // Adjust path as needed
+    import { goto } from "$app/navigation";
 
     // Dynamically assign projects to use the imported data
     let projects = Object.keys(projectData).map((key) => ({
+        key,
         name: projectData[key].title,
         description: projectData[key].shortDescription,
         tags: projectData[key].tags,
@@ -15,16 +17,14 @@
 
     onMount(() => {
         const triggerWave = () => {
-            waveElement!.style.animationPlayState = "running";
+            waveElement && (waveElement.style.animationPlayState = "running");
             setTimeout(() => {
-                waveElement!.style.animationPlayState = "paused";
+                waveElement && (waveElement.style.animationPlayState = "paused");
             }, 2000); // Pause the animation after 2 seconds
         };
 
         const randomiseWave = () => {
-            if (waveElement) {
-                triggerWave();
-            }
+            triggerWave();
             setTimeout(randomiseWave, Math.random() * 2000 + 6000); // Random interval between 3-8 seconds
         };
 
@@ -54,7 +54,12 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {#each projects as project}
                     <div
-                        class="bg-custom-blush text-custom-dark p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+                        class="bg-custom-blush text-custom-dark p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+                        on:click={() => goto(`/projects/${project.key}`)}
+                        on:keydown={() => {}}
+                        role="button"
+                        tabindex="0"
+                        aria-label="go to project"
                     >
                         <h3 class="text-lg font-semibold text-custom-red">
                             {project.name}
