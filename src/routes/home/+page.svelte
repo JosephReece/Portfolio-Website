@@ -1,15 +1,15 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import { Canvas } from "@threlte/core";
   import { OrbitControls } from "@threlte/extras";
   import { T } from "@threlte/core";
   import { cubicInOut } from "svelte/easing";
-  import { Tween, tweened } from "svelte/motion";
+  import { Tween } from "svelte/motion";
 
   // Array of objects with models and their descriptions
   const items = [
     {
-      name: "Cube",
+      name: "3D Square",
       description:
         "A simple geometric primitive with six square faces. Cubes are foundational shapes in 3D modeling and are often used as building blocks for more complex structures.",
       model: "Box",
@@ -81,7 +81,7 @@
         <T.PerspectiveCamera makeDefault position={[5, 5, 5]}>
           <OrbitControls
             onchange={(e) => {
-              console.log(e);
+              console.log(e.target.object.position);
             }}
           />
         </T.PerspectiveCamera>
