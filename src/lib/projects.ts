@@ -3,7 +3,7 @@ export interface Project {
     shortDescription: string;
     longDescription: string;
     tags: string[];
-    thumbnail: string; // URL to the project's thumbnail image
+    thumbnail: string;
 }
 
 export const projects: Record<string, Project> = {
@@ -35,42 +35,5 @@ export const projects: Record<string, Project> = {
         `,
         tags: ["React", "Node.js", "Ionic", "Stripe", "Firebase", "Google Cloud"],
         thumbnail: "https://picsum.photos/seed/projectBeta/400/300",
-    },
-    projectGamma: {
-        title: "Project Gamma",
-        shortDescription: "A full-stack e-commerce application.",
-        longDescription: `
-            Project Gamma was a comprehensive full-stack development project. 
-            I developed an e-commerce platform with features like user authentication, 
-            product search, and a checkout system. The frontend was built with React, 
-            and the backend included Node.js, Express, and a PostgreSQL database. 
-            This project helped me integrate complex systems effectively.
-        `,
-        tags: ["React", "Node.js", "Express", "PostgreSQL", "Authentication"],
-        thumbnail: "https://picsum.photos/seed/projectGamma/400/300",
-    },
-    projectDelta: {
-        title: "Project Delta",
-        shortDescription: "A machine learning project using Python.",
-        longDescription: `
-            Project Delta focused on data science and machine learning. 
-            I implemented a predictive model to forecast stock market trends using 
-            historical data. Libraries like Pandas, NumPy, and Scikit-learn were used 
-            extensively, and visualisations were created with Matplotlib.
-        `,
-        tags: ["Python", "Machine Learning", "Pandas", "NumPy", "Scikit-learn"],
-        thumbnail: "https://picsum.photos/seed/projectDelta/400/300",
-    },
-    projectEpsilon: {
-        title: "Project Epsilon",
-        shortDescription: "A mobile application for task management.",
-        longDescription: `
-            Project Epsilon was my first foray into mobile app development. 
-            I created a cross-platform task management app using Flutter. 
-            It featured a user-friendly interface, notifications, and cloud sync functionality. 
-            This project allowed me to explore the world of mobile UI/UX design.
-        `,
-        tags: ["Flutter", "Dart", "Mobile Development", "UI/UX Design"],
-        thumbnail: "https://picsum.photos/seed/projectEpsilon/400/300",
     },
 };
