@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 4.1.1 commit date:2024-04-15, commit time:15:11, hash:e1743a0317bc</authoring_tool>
+    </contributor>
+    <created>2024-09-02T13:42:48</created>
+    <modified>2024-09-02T13:42:48</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_effects>
+    <effect id="palette_019-effect">
+      <profile_COMMON>
+        <newparam sid="frame_01_png-surface">
+          <surface type="2D">
+            <init_from>frame_01_png</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="frame_01_png-sampler">
+          <sampler2D>
+            <source>frame_01_png-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <diffuse>
+              <texture texture="frame_01_png-sampler" texcoord="UVMap"/>
+            </diffuse>
+            <index_of_refraction>
+              <float sid="ior">1.5</float>
+            </index_of_refraction>
+          </lambert>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_images>
+    <image id="frame_01_png" name="frame_01_png">
+      <init_from>frame_01.png</init_from>
+    </image>
+  </library_images>
+  <library_materials>
+    <material id="palette_019-material" name="palette.019">
+      <instance_effect url="#palette_019-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="Untitled_019-mesh" name="Untitled.019">
+      <mesh>
+        <source id="Untitled_019-mesh-positions">
+          <float_array id="Untitled_019-mesh-positions-array" count="144">-1.2 0 0.1 -1.2 0 -0.1 -1.2 3.5 0.1 -1.2 3.5 -0.1 1.1 0.2 0 1.1 0.2 -0.1 1.1 3.3 0 1.1 3.3 -0.1 -1 0.2 0 -1 0.2 -0.1 -1 3.3 0 -1 3.3 -0.1 1.3 0 0.1 1.3 0 -0.1 1.3 3.5 0.1 1.3 3.5 -0.1 -1.2 0 0.1 -1.2 3.5 0.1 1.3 0 0.1 1.3 3.5 0.1 -1 0.2 0 -1 3.3 0 1.1 0.2 0 1.1 3.3 0 -1.2 0 -0.1 -1.2 3.5 -0.1 -1 0.2 -0.1 -1 3.3 -0.1 1.1 0.2 -0.1 1.1 3.3 -0.1 1.3 0 -0.1 1.3 3.5 -0.1 -1.2 0 0.1 1.3 0 0.1 -1.2 0 -0.1 1.3 0 -0.1 -1 3.3 0 1.1 3.3 0 -1 3.3 -0.1 1.1 3.3 -0.1 -1 0.2 0 1.1 0.2 0 -1 0.2 -0.1 1.1 0.2 -0.1 -1.2 3.5 0.1 1.3 3.5 0.1 -1.2 3.5 -0.1 1.3 3.5 -0.1</float_array>
+          <technique_common>
+            <accessor source="#Untitled_019-mesh-positions-array" count="48" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Untitled_019-mesh-normals">
+          <float_array id="Untitled_019-mesh-normals-array" count="27">-1 0 0 1 0 0 0 0 1 0 0 -1 0 0 -1 0 0 -1 0 0 -1 0 -1 0 0 1 0</float_array>
+          <technique_common>
+            <accessor source="#Untitled_019-mesh-normals-array" count="9" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="Untitled_019-mesh-map-0">
+          <float_array id="Untitled_019-mesh-map-0-array" count="168">0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5 0.943359 0.5</float_array>
+          <technique_common>
+            <accessor source="#Untitled_019-mesh-map-0-array" count="84" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="Untitled_019-mesh-vertices">
+          <input semantic="POSITION" source="#Untitled_019-mesh-positions"/>
+        </vertices>
+        <triangles material="palette_019-material" count="28">
+          <input semantic="VERTEX" source="#Untitled_019-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#Untitled_019-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#Untitled_019-mesh-map-0" offset="2" set="0"/>
+          <p>2 0 0 1 0 1 0 0 2 3 0 3 1 0 4 2 0 5 6 0 6 5 0 7 4 0 8 7 0 9 5 0 10 6 0 11 8 1 12 9 1 13 10 1 14 10 1 15 9 1 16 11 1 17 12 1 18 13 1 19 14 1 20 14 1 21 13 1 22 15 1 23 18 2 24 17 2 25 16 2 26 19 2 27 17 2 28 18 2 29 20 3 30 21 3 31 22 3 32 22 3 33 21 3 34 23 3 35 24 4 36 25 4 37 26 4 38 26 5 39 25 5 40 27 5 41 24 3 42 26 3 43 28 3 44 27 3 45 25 3 46 29 3 47 24 3 48 28 3 49 30 3 50 28 3 51 29 3 52 30 3 53 29 3 54 25 3 55 31 3 56 30 6 57 29 6 58 31 6 59 34 7 60 33 7 61 32 7 62 35 7 63 33 7 64 34 7 65 38 7 66 37 7 67 36 7 68 39 7 69 37 7 70 38 7 71 40 8 72 41 8 73 42 8 74 42 8 75 41 8 76 43 8 77 44 8 78 45 8 79 46 8 80 46 8 81 45 8 82 47 8 83</p>
+        </triangles>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="Untitled" name="Untitled" type="NODE">
+        <matrix sid="transform">0.3 0 0 0 0 2.26494e-8 -0.3 0 0 0.3 2.26494e-8 0 0 0 0 1</matrix>
+        <instance_geometry url="#Untitled_019-mesh" name="Untitled">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="palette_019-material" target="#palette_019-material">
+                <bind_vertex_input semantic="UVMap" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

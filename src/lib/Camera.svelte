@@ -1,47 +1,38 @@
 <script lang="ts">
-  import { interactivity, useInteractivity } from "@threlte/extras";
   import { T } from "@threlte/core";
-  import { cameraConfigs, currentView, type View } from "$lib/view";
-  import { quadInOut } from "svelte/easing";
-  import { Tween } from "svelte/motion";
+  import { CameraControls } from "@threlte/extras";
+  import type { CameraControlsRef } from "@threlte/extras";
+  import { cameraConfigs, currentView } from "$lib/view";
 
-  interactivity();
-  const { pointer } = useInteractivity();
+  let controls: CameraControlsRef | undefined;
 
-  const createTweens = (initial: number[], duration: number, tween: (t: number) => number) =>
-    initial.map(
-      (value) => new Tween(value, { duration, easing: tween }),
-    );
-
-  // Create tweens for position and rotation
-  const posTweens = createTweens(cameraConfigs.home.position, 800, quadInOut);
-  const rotTweens = createTweens(cameraConfigs.home.rotation, 800, quadInOut);
-
-  // Update targets when view changes
-  // Parallax rotation drift amount
-  const driftStrength = 0.03;
-
-  // Apply pointer-based parallax to rotation tweens
-  $: {
+  // React to view changes
+  $: if (controls) {
     const cfg = cameraConfigs[$currentView];
 
-    cfg.position.forEach((val, i) => {
-      posTweens[i].target = val;
-    });
-
-    cfg.rotation.forEach((val, i) => {
-      if (i === 0) rotTweens[i].target = val // + $pointer.y * driftStrength; // X-axis
-      if (i === 1) rotTweens[i].target = val // + -$pointer.x * driftStrength; // Y-axis
-      else rotTweens[i].target = val;
-    });
+    controls.setLookAt(
+      cfg.position[0],
+      cfg.position[1],
+      cfg.position[2],
+      cfg.target[0],
+      cfg.target[1],
+      cfg.target[2],
+      true
+    );
   }
 </script>
 
-<T.Group position={posTweens.map((t) => t.current) as [number, number, number]}>
-  <T.PerspectiveCamera
-    makeDefault
-    zoom={1.4}
-    position={[0, 0, 0]}
-    rotation={rotTweens.map((t) => t.current) as [number, number, number]}
-  />
-</T.Group>
+<!-- Camera controls -->
+<CameraControls
+  bind:ref={controls}
+  enabled={false}
+  smoothTime={0.25}
+  dollySpeed={0.6}
+  truckSpeed={0.8}
+/>
+
+<!-- Camera itself -->
+<T.PerspectiveCamera
+  makeDefault
+  zoom={1.4}
+/>
