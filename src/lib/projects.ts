@@ -13,8 +13,7 @@ export const projects: Record<string, Project> = {
         longDescription: `
             This app was designed as an introductory project to familiarise myself 
             with simple cryptography concepts including Diffie-Hellman key exchange and XOR encryption. 
-            The focus was on building an app with clean, structured code 
-            that was optimised for performance.
+            The focus was on building a simple app with clean, structured code.
         `,
         tags: ["Visual Basic .NET"],
         thumbnail: "https://picsum.photos/seed/projectAlpha/400/300",

@@ -1,12 +1,26 @@
 <script lang="ts">
-  import { T } from "@threlte/core";
-  import { CameraControls } from "@threlte/extras";
-  import type { CameraControlsRef } from "@threlte/extras";
+  import { T, useTask } from "@threlte/core";
+  import {
+    CameraControls,
+    interactivity,
+    useInteractivity,
+    type CameraControlsRef,
+  } from "@threlte/extras";
   import { cameraConfigs, currentView } from "$lib/view";
+
+  interactivity();
+  const { pointer } = useInteractivity();
 
   let controls: CameraControlsRef | undefined;
 
-  // React to view changes
+  // Parallax tuning
+  const ROTATE_STRENGTH = 0.1; // radians max
+  const SMOOTHING = 0.2;
+
+  let lastAzimuth = 0;
+  let lastPolar = 0;
+
+  // Set base camera when view changes
   $: if (controls) {
     const cfg = cameraConfigs[$currentView];
 
@@ -17,9 +31,30 @@
       cfg.target[0],
       cfg.target[1],
       cfg.target[2],
-      true
+      true,
     );
+
+    // Reset rotation state
+    lastAzimuth = 0;
+    lastPolar = 0;
   }
+
+  // Mouse-driven parallax rotation
+  useTask(() => {
+    if (!controls) return;
+
+    const targetAzimuth = - $pointer.x * ROTATE_STRENGTH;
+    const targetPolar = $pointer.y * ROTATE_STRENGTH;
+
+    // Smooth deltas
+    const azimuthDelta = (targetAzimuth - lastAzimuth) * SMOOTHING;
+    const polarDelta = (targetPolar - lastPolar) * SMOOTHING;
+
+    controls.rotate(azimuthDelta, polarDelta, true);
+
+    lastAzimuth += azimuthDelta;
+    lastPolar += polarDelta;
+  });
 </script>
 
 <!-- Camera controls -->
@@ -32,7 +67,4 @@
 />
 
 <!-- Camera itself -->
-<T.PerspectiveCamera
-  makeDefault
-  zoom={1.4}
-/>
+<T.PerspectiveCamera makeDefault zoom={1.4} />

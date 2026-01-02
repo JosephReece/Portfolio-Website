@@ -1,9 +1,54 @@
-| Object           | Represents                                            | Action                                      |
-|------------------|-------------------------------------------------------|---------------------------------------------|
-| Laptop           | Projects                                              | Fun browser-like interface for projects     |
-| Notepad          | Career Summary / Work Experience                      | Flip pages or scroll through timeline       |
-| Books            | Education section                                     | Each book represents an education,          |
-| Toolbox          | Skills (TS/JS, Python, React, etc.)                   | Hover to reveal skill badges or levels      |
-| Portrait Frame   | About You / Summary                                   | Click to read a short bio or intro          |
-| Business Card Pinned to Wall    | Contact info & links (LinkedIn, GitHub, Email)        | Click to open or copy contact links         |
-| Shelf of Items   | Hobbies                                               | Explore items representing each hobby       |
+# Layout
+
+## Bookshelf — Education & Qualifications
+- Each book represents an A-Level, GCSE, or License
+- Hover interaction:
+  - Subtle wiggle effect (similar to *This Is the Police* record selection)
+- Ambient audio:
+  - Book/page-turn sounds
+
+## Shelf — Hobbies
+- Chess
+- Poker
+- Flying
+- Visual effects:
+  - Subtle hover + rotation
+  - Optional 3D / HTML glassmorphism tooltip
+
+## Whiteboard — Careers
+- Handwriting animation for each entry (whiteboard marker style)
+- Navigation:
+  - Arrows at the bottom to switch between careers
+- Ambient audio:
+  - Marker writing sounds
+
+## Desk — Projects
+- Screen content:
+  - Browser or slideshow-style interface on the screen
+- Visual effects:
+  - CRT or chromatic aberration shader
+  - Optional pixelated text
+- Ambient audio:
+  - Chiptune background
+
+## Seating Area — Contact / About Me / Referrals
+- Small book:
+  - “About Me” entry
+- Notes sheet:
+  - Referrals
+- Stack of business cards:
+  - Logos for each contact method (LinkedIn, phone, etc.)
+- Coffee mug:
+  - Steam shader effect
+- Ambient audio:
+  - Coffee cup clinking sounds
+
+# TODO
+- [ ] Refactor code
+  - Remove object groups and have as seperate svelte files
+  - Could use a generic/baseline/inheritance for gltf and hover 
+- [x] Add all hobbies
+  - [x] Chess
+  - [ ] Flying
+  - [ ] Poker
+- [ ] Add 'enter experience'/loading screen
