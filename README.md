@@ -11,6 +11,9 @@
 - Chess
 - Poker
 - Flying
+- Tennis
+- Coffee
+- Chinese/Languages
 - Visual effects:
   - Subtle hover + rotation
   - Optional 3D / HTML glassmorphism tooltip

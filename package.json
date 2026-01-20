@@ -31,6 +31,7 @@
 		"@threlte/core": "^8.0.1",
 		"@threlte/extras": "^9.0.1",
 		"lucide-svelte": "^0.562.0",
+		"postprocessing": "^6.38.2",
 		"three": "^0.174.0",
 		"two.js": "^0.8.15"
 	},

@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { Canvas, T } from "@threlte/core";
+  import { Canvas } from "@threlte/core";
+  import { Sky } from "@threlte/extras";
 
   import Scene from "$lib/scene/Scene.svelte";
-  import Camera from "$lib/Camera.svelte";
-  import ViewDropdown from "$lib/ui/ViewDropdown.svelte";
+  import CustomRenderer from "$lib/scene/CustomRenderer.svelte";
+  import Camera from "$lib/scene/Camera.svelte";
 
   import { currentView } from "$lib/view";
-    import { Sky } from "@threlte/extras";
+  import ViewDropdown from "$lib/ui/ViewDropdown.svelte";
 
   let audio: HTMLAudioElement;
   let context: AudioContext | undefined;
@@ -42,7 +43,7 @@
     audio.play();
 
     // fade in volume
-    gain?.gain.setTargetAtTime(1, context!.currentTime, VOLUME_TIME);
+    gain?.gain.setTargetAtTime(0.5, context!.currentTime, VOLUME_TIME);
   }
 
   // React to view changes
@@ -61,8 +62,7 @@
 
 <audio bind:this={audio} src="/city-sounds.mp3" preload="metadata" loop></audio>
 
-<div class="scene-container" onpointerdown={play}>
-  <!-- View Selector -->
+<div class="relative w-full h-screen" onpointerdown={play}>
   <div class="fixed top-4 right-4 z-10 select-none">
     <ViewDropdown />
   </div>
@@ -70,6 +70,8 @@
   <Canvas shadows>
     <Camera />
     <Scene />
+
+    <CustomRenderer />
 
     <Sky
       setEnvironment={true}
@@ -83,11 +85,3 @@
     />
   </Canvas>
 </div>
-
-<style>
-  .scene-container {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-  }
-</style>

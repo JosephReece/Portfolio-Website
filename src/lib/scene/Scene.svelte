@@ -1,14 +1,17 @@
 <script lang="ts">
   import { T, useTask } from "@threlte/core";
   import { useGltf, interactivity, Suspense, Text } from "@threlte/extras";
-  import { type Object3D, MeshStandardMaterial } from "three";
+  import { type Object3D, MathUtils, Mesh, MeshStandardMaterial } from "three";
   import { Spring } from "svelte/motion";
 
-  import { cameraConfigs, currentView, type View } from "$lib/view";
-  import { addHoverShader, type HoverMaterial } from "./hover";
+  import { groupings, currentView, type View } from "$lib/view";
+  import { addHoverShader, type HoverMaterial } from "./effects/hover";
   import { groups } from "./groups";
 
-  import WhiteboardCover from "./WhiteboardCover.svelte";
+  import HoverGroup from "./HoverGroup.svelte";
+
+  import Whiteboard from "./objects/Whiteboard.svelte";
+  import Shelf from "./objects/Shelf.svelte";
 
   interactivity();
 
@@ -44,6 +47,8 @@
       }
     });
   });
+
+  let shelfCentroid = $state<[number, number, number]>([0, 0, 0]);
 </script>
 
 <Suspense final>
@@ -56,7 +61,7 @@
       anchorX="50%"
       anchorY="50%"
       oncreate={(ref) => {
-        ref.lookAt(...cameraConfigs["home"].position);
+        ref.lookAt(...groupings["home"].position);
       }}
     />
   {/snippet}
@@ -92,7 +97,7 @@
         }}
       >
         {#each group.objects as object}
-          {#await useGltf(((!object.pack || object.pack == 'office') ? "/3D voxel Office pack/glb" : "/3D voxel Chess pack/glb") + object.src) then gltf}
+          {#await useGltf((!object.pack || object.pack == "office" ? "/3D voxel Office pack/glb" : "/3D voxel Chess pack/glb") + object.src) then gltf}
             {@const clonedScene = gltf.scene.clone(true) as Object3D}
             {@const materials: HoverMaterial[] = []}
 
@@ -121,7 +126,19 @@
       </T.Group>
     {/each}
 
-    <WhiteboardCover />
+    <HoverGroup
+      view="careers"
+      position={[0, 0, -0.8]}
+      rotation={[0, 180 * MathUtils.DEG2RAD, 0]}
+    >
+      <Whiteboard />
+    </HoverGroup>
 
+    <HoverGroup
+      view="hobbies"
+      bind:centroid={() => shelfCentroid, (c) => (shelfCentroid = c)}
+    >
+      <Shelf bind:centroid={() => shelfCentroid, (c) => (shelfCentroid = c)} />
+    </HoverGroup>
   </T.Group>
 </Suspense>

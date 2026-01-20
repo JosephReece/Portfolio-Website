@@ -57,40 +57,7 @@ export const groups = ([
       },
     ] as any,
   },
-
-  // Whiteboard (Careers)
-  {
-    id: "whiteboard",
-    goto: "careers",
-    objects: [
-      {
-        src: "/Furniture/board_white_01.glb",
-        position: [0, 0, -0.8],
-        rotation: [0, Math.PI, 0],
-      },
-    ],
-  },
-
-  // Shelf (Hobbies)
-  {
-    id: "shelf",
-    goto: "hobbies",
-    objects: [
-      {
-        src: "/Furniture/shelves_03.glb",
-        position: [4.2, 0, -0.9],
-        rotation: [0, Math.PI / 2, 0],
-      },
-      {
-        pack: 'chess',
-        src: "/black_rook.glb",
-        scale: 0.2,
-        position: [4, 1.14, -0.9],
-        rotation: [0, Math.PI / 2, 0],
-      },
-    ],
-  },
-
+  
   // Bookshelf (Education)
   {
     id: "bookshelf",

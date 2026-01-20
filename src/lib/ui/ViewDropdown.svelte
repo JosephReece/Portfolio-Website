@@ -2,39 +2,27 @@
   import { fly, fade, scale } from "svelte/transition";
   import { cubicOut, cubicInOut } from "svelte/easing";
   import { ChevronDown } from "lucide-svelte";
-  import { currentView } from "$lib/view";
+  import { currentView, groupings, type View } from "$lib/view";
 
-  type View =
-    | "home"
-    | "projects"
-    | "careers"
-    | "education"
-    | "hobbies"
-    | "contact";
+  let isOpen = $state(false);
+  let selectedLabel = $state('');
 
-  const viewLabels: { value: View; label: string }[] = [
-    { value: "home", label: "Home" },
-    { value: "projects", label: "Projects" },
-    { value: "careers", label: "Careers" },
-    { value: "education", label: "Education" },
-    { value: "hobbies", label: "Hobbies" },
-    { value: "contact", label: "Contact" },
-  ];
-
-  let isOpen = false;
+  const viewLabels = Object.entries(groupings).map(([name, details]) => ({label: details.label, value: name}));
 
   function handleSelect(value: View) {
     currentView.set(value);
     isOpen = false;
   }
 
-  $: selectedLabel =
-    viewLabels.find((v) => v.value === $currentView)?.label ?? "Select";
+  $effect(() => {
+    selectedLabel = groupings[$currentView].label ?? "Select";
+  });
+
 </script>
 
 <!-- Trigger Button -->
 <button
-  on:click={() => (isOpen = !isOpen)}
+  onclick={() => (isOpen = !isOpen)}
   class="w-full px-4 py-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg text-white flex items-center justify-between shadow-lg transition-all duration-200 hover:scale-[1.02] hover:bg-slate-800/70 active:scale-[0.98]"
 >
   <span class="font-medium mr-1">{selectedLabel}</span>
@@ -56,7 +44,7 @@
   >
     {#each viewLabels as item, index}
       <button
-        on:click={() => handleSelect(item.value)}
+        onclick={() => handleSelect(item.value as View)}
         class={`w-full px-4 py-3 text-left transition-all duration-200 ${
           $currentView === item.value
             ? "bg-blue-600/20 text-blue-400 font-medium"
