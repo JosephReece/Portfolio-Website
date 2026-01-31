@@ -1,6 +1,6 @@
 <script lang="ts">
   import { T, useTask } from "@threlte/core";
-  import { useGltf, interactivity, Suspense, Text } from "@threlte/extras";
+  import { useGltf, interactivity, Suspense, Text, useProgress } from "@threlte/extras";
   import { type Object3D, MathUtils, Mesh, MeshStandardMaterial } from "three";
   import { Spring } from "svelte/motion";
 
@@ -46,6 +46,12 @@
         u.uHover.value = h;
       }
     });
+  });
+
+  const { progress } = useProgress();
+
+  useTask(() => {
+    console.log(progress.current);
   });
 
   let shelfCentroid = $state<[number, number, number]>([0, 0, 0]);

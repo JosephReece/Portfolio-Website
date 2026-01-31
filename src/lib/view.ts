@@ -37,8 +37,8 @@ export const groupings: Record<View, { label: string, position: Vector; target: 
 
     careers: {
         label: "Careers",
-        position: [0, 1.4, 2.2],
-        target: [0, 1.4, 0.2], // whiteboard
+        position: [0, 1.5, 1.2],
+        target: [0, 1.5, 0.2], // whiteboard
     },
 
     hobbies: {

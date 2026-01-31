@@ -5,7 +5,7 @@
   let props = $props();
 
   const CHIP_COUNT = 8;
-  const CHIP_Y_STEP = 0.011;
+  const CHIP_Y_STEP = 0.017;
   const CHIP_JITTER = 0.004;
 
   // Generate jitter once on initialization
@@ -16,10 +16,10 @@
   }));
 </script>
 
-<T.Group {...props} scale={1.4}>
+<T.Group scale={1.4} {...props} >
   {#each chipOffsets as offset}
     <T.Mesh position={[offset.x, offset.y, offset.z]}>
-      <T.BoxGeometry args={[0.04, 0.01, 0.04]} />
+      <T.BoxGeometry args={[0.04, 0.015, 0.04]} />
       <T.MeshStandardMaterial color="red" />
     </T.Mesh>
   {/each}

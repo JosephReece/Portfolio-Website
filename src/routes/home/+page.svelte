@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Canvas } from "@threlte/core";
-  import { Sky } from "@threlte/extras";
+  import { Canvas, useTask } from "@threlte/core";
+  import { Sky, useProgress } from "@threlte/extras";
 
   import Scene from "$lib/scene/Scene.svelte";
   import CustomRenderer from "$lib/scene/CustomRenderer.svelte";
