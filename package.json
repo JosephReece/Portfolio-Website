@@ -27,6 +27,7 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@number-flow/svelte": "^0.3.10",
 		"@sveltejs/adapter-cloudflare": "^5.0.1",
 		"@threlte/core": "^8.0.1",
 		"@threlte/extras": "^9.0.1",

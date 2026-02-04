@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { fly, fade, scale } from "svelte/transition";
-  import { cubicOut, cubicInOut } from "svelte/easing";
+  import { fly, fade } from "svelte/transition";
+  import { cubicOut } from "svelte/easing";
   import { ChevronDown } from "lucide-svelte";
   import { currentView, groupings, type View } from "$lib/view";
 
@@ -17,44 +17,60 @@
   $effect(() => {
     selectedLabel = groupings[$currentView].label ?? "Select";
   });
-
 </script>
 
-<!-- Trigger Button -->
-<button
-  onclick={() => (isOpen = !isOpen)}
-  class="w-full px-4 py-3 bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg text-white flex items-center justify-between shadow-lg transition-all duration-200 hover:scale-[1.02] hover:bg-slate-800/70 active:scale-[0.98]"
->
-  <span class="font-medium mr-1">{selectedLabel}</span>
-
-  <span
-    class="inline-flex origin-center transition-transform duration-300 ease-in-out"
-    style="transform: rotate({isOpen ? 180 : 0}deg)"
+<div class="relative min-w-[180px]">
+  <button
+    onclick={() => (isOpen = !isOpen)}
+    class="w-full px-4 py-3 bg-black/40 backdrop-blur-md border border-white/10 text-white flex items-center justify-between transition-all duration-500 hover:border-white/40 group"
   >
-    <ChevronDown size={20} />
-  </span>
-</button>
+    <span class="text-[11px] uppercase tracking-[0.2em] font-light">{selectedLabel}</span>
 
-<!-- Dropdown -->
-{#if isOpen}
-  <div
-    class="absolute top-full mt-2 w-full bg-slate-800/95 backdrop-blur-md border border-slate-700/50 rounded-lg shadow-2xl overflow-hidden z-10"
-    in:fly={{ y: -10, duration: 200, easing: cubicOut }}
-    out:fly={{ y: -10, duration: 150, easing: cubicInOut }}
-  >
-    {#each viewLabels as item, index}
-      <button
-        onclick={() => handleSelect(item.value as View)}
-        class={`w-full px-4 py-3 text-left transition-all duration-200 ${
-          $currentView === item.value
-            ? "bg-blue-600/20 text-blue-400 font-medium"
-            : "text-slate-300 hover:bg-slate-700/50 hover:text-white"
-        }`}
-        style="animation-delay: {index * 50}ms"
-        in:fly={{ x: -20, duration: 200, easing: cubicOut }}
-      >
-        {item.label}
-      </button>
-    {/each}
-  </div>
-{/if}
+    <span
+      class="flex items-center justify-center w-5 transition-transform duration-500 ease-out opacity-40 group-hover:opacity-100"
+      style="transform: rotate({isOpen ? 180 : 0}deg)"
+    >
+      <ChevronDown size={14} strokeWidth={1} />
+    </span>
+  </button>
+
+  {#if isOpen}
+    <div
+      class="absolute top-full left-0 right-0 mt-1 bg-black/90 backdrop-blur-xl border border-white/10 shadow-2xl z-50"
+      transition:fade={{ duration: 200 }}
+    >
+      <div class="flex flex-col py-1">
+        {#each viewLabels as item, index}
+          <button
+            onclick={() => handleSelect(item.value as View)}
+            class="w-full px-4 py-4 text-left transition-all duration-300 group relative"
+            in:fly={{ y: -5, delay: index * 30, duration: 400, easing: cubicOut }}
+          >
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <div class="relative flex items-center justify-between">
+              <span class="text-[10px] uppercase tracking-[0.2em] font-light {$currentView === item.value ? 'text-white' : 'text-white/40 group-hover:text-white/80'}">
+                {item.label}
+              </span>
+              
+              <div class="flex items-center justify-center w-5">
+                {#if $currentView === item.value}
+                  <div 
+                    in:fade={{ duration: 300 }} 
+                    class="w-1 h-1 bg-white rounded-full shadow-[0_0_8px_rgba(255,255,255,0.8)]"
+                  ></div>
+                {/if}
+              </div>
+            </div>
+          </button>
+        {/each}
+      </div>
+    </div>
+  {/if}
+</div>
+
+<!-- <style>
+  button {
+    cursor: crosshair;
+  }
+</style> -->

@@ -1,10 +1,21 @@
 <script lang="ts">
   import { T, useTask } from "@threlte/core";
-  import { useGltf, interactivity, Suspense, Text, useProgress } from "@threlte/extras";
+  import {
+    useGltf,
+    interactivity,
+    Suspense,
+    Text,
+    useProgress,
+  } from "@threlte/extras";
   import { type Object3D, MathUtils, Mesh, MeshStandardMaterial } from "three";
   import { Spring } from "svelte/motion";
 
-  import { groupings, currentView, type View } from "$lib/view";
+  import {
+    groupings,
+    currentView,
+    type View,
+    loadingProgress,
+  } from "$lib/view";
   import { addHoverShader, type HoverMaterial } from "./effects/hover";
   import { groups } from "./groups";
 
@@ -49,29 +60,12 @@
   });
 
   const { progress } = useProgress();
-
-  useTask(() => {
-    console.log(progress.current);
-  });
+  progress.subscribe((progress) => loadingProgress.set(progress));
 
   let shelfCentroid = $state<[number, number, number]>([0, 0, 0]);
 </script>
 
 <Suspense final>
-  {#snippet fallback()}
-    <Text
-      position.z={-1}
-      text="Loading..."
-      fontSize={1}
-      color="black"
-      anchorX="50%"
-      anchorY="50%"
-      oncreate={(ref) => {
-        ref.lookAt(...groupings["home"].position);
-      }}
-    />
-  {/snippet}
-
   <T.Group>
     {#each groups as group}
       {@const details = groupDetails.get(group.id)!}
