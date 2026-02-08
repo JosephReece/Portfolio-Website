@@ -4,12 +4,9 @@ import { writable } from 'svelte/store'
 export type Vector = [number, number, number];
 export type View = 'home' | 'projects' | 'careers' | 'education' | 'contact' | 'hobbies'; // 'technical-skills' | 'about-me'
 
-export const OFFICE_PATH = "/3D voxel Office pack/glb";
-export const CHESS_PATH = "/3D voxel Chess pack/glb";
-
 export const loadingProgress = writable<number>(0);
-
 export const currentView = writable<View>('home');
+
 export const lightOn = writable<boolean>(true);
 
 export const groupings: Record<View, { label: string, position: Vector; target: Vector }> = {
