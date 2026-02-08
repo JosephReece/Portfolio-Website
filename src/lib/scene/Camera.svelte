@@ -67,4 +67,4 @@
 />
 
 <!-- Camera itself -->
-<T.PerspectiveCamera makeDefault zoom={1.4} />
+<T.PerspectiveCamera makeDefault />

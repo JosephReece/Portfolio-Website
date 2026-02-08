@@ -1,37 +1,22 @@
-import type { Vector } from "$lib/view";
+import { Object3D, Vector3 } from "three";
+import type { Vector } from "./view";
 
-/**
- * Calculates the centroid of a set of positions and returns 
- * new positions relative to that center.
- */
-export function centerPositions<T extends string>(
-  positions: Record<T, Vector>
-): { positions: Record<T, Vector>; centroid: Vector } {
-  const keys = Object.keys(positions) as T[];
-  const values = Object.values(positions) as Vector[];
-  const count = values.length;
+export function centerObjectOnChildren(root: Object3D) {
+  const children = root.children;
+  if (children.length === 0) return null;
 
-  if (count === 0) {
-    return { positions, centroid: [0, 0, 0] };
+  const centroid = new Vector3();
+  for (const child of children) {
+    centroid.add(child.position);
   }
 
-  // 1. Calculate the Centroid
-  const centroid: Vector = values.reduce(
-    (acc, curr) => [acc[0] + curr[0], acc[1] + curr[1], acc[2] + curr[2]],
-    [0, 0, 0]
-  ).map(val => val / count) as Vector;
+  centroid.divideScalar(children.length);
 
-  // 2. Create new positions relative to the centroid
-  const centeredPositions = {} as Record<T, Vector>;
-  
-  for (const key of keys) {
-    const p = positions[key];
-    centeredPositions[key] = [
-      p[0] - centroid[0],
-      p[1] - centroid[1],
-      p[2] - centroid[2]
-    ];
+  // root.position.add(centroid);
+
+  for (const child of children) {
+    child.position.sub(centroid);
   }
 
-  return { positions: centeredPositions, centroid };
+  return centroid;
 }

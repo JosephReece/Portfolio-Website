@@ -15,32 +15,32 @@ export const lightOn = writable<boolean>(true);
 export const groupings: Record<View, { label: string, position: Vector; target: Vector }> = {
     home: {
         label: "Home",
-        position: [8.5, 3, 8.5],
-        target: [2.4, 0.5, 2.4], // center of the room
+        position: [3, 2.5, 3],
+        target: [0, 1, 0], // center of the room
     },
 
     education: {
         label: "Education",
-        position: [2, 1.2, 4.5],
-        target: [-1, 1.2, 4.5], // bookshelf
+        position: [0.5, 3.2, -1],
+        target: [-1, 2.5, -1], // shelf
     },
 
     projects: {
         label: "Projects",
-        position: [1.5, 1.5, 0.2],
-        target: [2, 1.1, -0.7], // desk
+        position: [1.5, 1.5, -0.1],
+        target: [1.3, 1.2, -0.7], // desk
     },
 
     careers: {
         label: "Careers",
-        position: [0, 1.5, 1.2],
-        target: [0, 1.5, 0.2], // whiteboard
+        position: [-0.3, 2.4, 1.3],
+        target: [-1, 2.4, 1.3], // whiteboard
     },
 
     hobbies: {
         label: "Hobbies",
-        position: [5.3, 2, 1],
-        target: [4.2, 0.9, -0.9], // shelf
+        position: [0.5, 2, 0.2],
+        target: [-1, 1.6, 0.2], // shelf
     },
 
     contact: {

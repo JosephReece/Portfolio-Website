@@ -19,7 +19,6 @@
   let entered = $state(false);
   let mounted = $state(false);
 
-  // This controls the button appearance specifically
   let showButton = $state(false);
 
   const progress = new Tween(0, {
@@ -31,10 +30,8 @@
     progress.set($loadingProgress);
   });
 
-  // Watch for the specific moment progress reaches 100%
   $effect(() => {
     if (progress.current >= 0.999) {
-      // The 200ms pause you requested
       const timer = setTimeout(() => {
         showButton = true;
       }, 400);
@@ -72,8 +69,12 @@
           <h1 class="text-xl tracking-[0.2em] uppercase font-light mb-2">
             Joseph Reece
           </h1>
-          <p class="text-[10px] tracking-[0.2em] text-white/40 uppercase">
+          <p class="text-[10px] tracking-[0.2em] text-white/70 uppercase">
             Software Developer
+          </p>
+
+          <p class="mt-2 text-[10px] tracking-[0.2em] text-white/70 uppercase">
+            This project is currently a work in progress
           </p>
         </div>
         <div class="h-20 flex items-center justify-center">
@@ -113,9 +114,10 @@
     <ViewDropdown />
   </div>
 
-  <div class="w-full h-full" onpointerdown={() => audioHandler?.playAudio()}>
+  <div class="w-full h-full">
     <Canvas>
       <Camera />
+
       <Scene />
       <CustomRenderer />
       <Sky
