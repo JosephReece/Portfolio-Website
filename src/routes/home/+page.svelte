@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, type Component } from "svelte";
   import { fade } from "svelte/transition";
   import { Tween } from "svelte/motion";
   import { cubicOut } from "svelte/easing";
   import { Canvas } from "@threlte/core";
   import { Sky } from "@threlte/extras";
-  import NumberFlow from "@number-flow/svelte";
 
   import Scene from "$lib/scene/Scene.svelte";
   import CustomRenderer from "$lib/scene/CustomRenderer.svelte";
@@ -19,6 +18,7 @@
   let entered = $state(false);
   let mounted = $state(false);
 
+  let NumberFlowComponent = $state<Component | null>(null);
   let showButton = $state(false);
 
   const progress = new Tween(0, {
@@ -41,8 +41,11 @@
     }
   });
 
-  onMount(() => {
+  onMount(async () => {
     mounted = true;
+
+    const mod = await import("@number-flow/svelte");
+    NumberFlowComponent = mod.default as any;
   });
 
   const displayPercent = $derived(Math.round(progress.current * 100));
@@ -61,10 +64,7 @@
       out:fade={{ duration: 600 }}
       class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black text-white"
     >
-      <div
-        out:fade={{ duration: 200 }}
-        class="flex flex-col items-center justify-end h-40 w-72"
-      >
+      <div out:fade={{ duration: 200 }} class="flex flex-col items-center w-72">
         <div class="mb-4 text-center" in:fade={{ delay: 200, duration: 800 }}>
           <h1 class="text-xl tracking-[0.2em] uppercase font-light mb-2">
             Joseph Reece
@@ -77,7 +77,7 @@
             This project is currently a work in progress
           </p>
         </div>
-        <div class="h-20 flex items-center justify-center">
+        <div class="h-6 flex items-center justify-between">
           {#if mounted}
             {#if showButton}
               <button
@@ -91,7 +91,12 @@
               <div
                 class="flex items-baseline gap-2 text-white/40 font-light italic"
               >
-                <NumberFlow value={displayPercent} class="text-3xl font-sans" />
+                {#if NumberFlowComponent}
+                  <NumberFlowComponent
+                    value={displayPercent}
+                    class="text-3xl font-sans"
+                  />
+                {/if}
                 <span class="text-xs uppercase tracking-widest opacity-60"
                   >%</span
                 >
