@@ -2,6 +2,7 @@
   import { T } from "@threlte/core";
   import HoverGroup from "../HoverGroup.svelte";
   import type { Vector } from "$lib/view";
+  import { setShadows } from "$lib/utils";
 
   let { scene = $bindable() } = $props();
 
@@ -10,13 +11,13 @@
 
   $effect(() => {
     if (node && !position) {
-      position = [
-        node.position.x,
-        node.position.y,
-        node.position.z,
-      ];
+      position = [node.position.x, node.position.y, node.position.z];
       node.position.set(0, 0, 0);
     }
+  });
+
+  $effect(() => {
+    setShadows(node);
   });
 </script>
 

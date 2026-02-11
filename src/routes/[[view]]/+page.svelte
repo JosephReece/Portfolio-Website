@@ -3,17 +3,19 @@
   import { fade } from "svelte/transition";
   import { Tween } from "svelte/motion";
   import { cubicOut } from "svelte/easing";
-  import { Canvas } from "@threlte/core";
-  import { Sky } from "@threlte/extras";
+  import { Canvas, useTask } from "@threlte/core";
+  import { OrbitControls, Sky } from "@threlte/extras";
+  import { T } from "@threlte/core";
 
   import Scene from "$lib/scene/Scene.svelte";
   import CustomRenderer from "$lib/scene/CustomRenderer.svelte";
   import Camera from "$lib/scene/Camera.svelte";
   import ViewDropdown from "$lib/ui/ViewDropdown.svelte";
 
-  import { loadingProgress } from "$lib/view";
+  import { loadingProgress, type Vector } from "$lib/view";
   import AudioHandler from "$lib/AudioHandler.svelte";
   import BottomDock from "$lib/ui/BottomDock.svelte";
+  import { MathUtils, Mesh, Object3D } from "three";
 
   let audioHandler: AudioHandler;
   let entered = $state(false);
@@ -56,6 +58,24 @@
     entered = true;
     if (audioHandler) audioHandler.playAudio();
   };
+
+  const sunMesh = new Mesh();
+
+  const target = new Object3D();
+
+  let lightPos: Vector = $state([-0.7, 2.3, -4]);
+  let lightTarget: Vector = $state([0, -0.5, 0]);
+
+  $effect(() => {
+    target.position.set(...lightTarget);
+  });
+
+  let lightIntensity = $state(2.8);
+  let lightColor = $state("#ffb74d");
+
+  let hemiIntensity = $state(0.9);
+  let hemiSkyColor = $state("#ffe0b2");
+  let hemiGroundColor = $state("#2c2c2c");
 </script>
 
 <AudioHandler bind:this={audioHandler} />
@@ -121,20 +141,58 @@
   <ViewDropdown />
 
   <div class="w-full h-full">
-    <Canvas>
-      <Camera />
-
+    <Canvas shadows>
       <Scene />
-      <CustomRenderer />
-      <Sky
-        setEnvironment
-        azimuth={180}
-        elevation={30}
-        exposure={0.65}
-        mieCoefficient={0.002}
-        mieDirectionalG={0.86}
-        rayleigh={0.3}
-        turbidity={4.78}
+      <Camera />
+      <CustomRenderer {sunMesh} />
+
+      <!-- <T.PerspectiveCamera makeDefault position={[4, 3, 6]} fov={50}>
+        <OrbitControls enableDamping dampingFactor={0.05} target={[0, 1, 0]} />
+      </T.PerspectiveCamera> -->
+
+      <T.Group position={lightPos}>
+        <T.Mesh>
+          <T.BoxGeometry args={[0.4, 0.4, 0.4]} />
+          <T.MeshBasicMaterial color="red" wireframe />
+        </T.Mesh>
+      </T.Group>
+
+      <T.Mesh position={lightTarget}>
+        <T.SphereGeometry args={[0.2, 16, 16]} />
+        <T.MeshBasicMaterial color="blue" wireframe />
+      </T.Mesh>
+
+      <T is={target} />
+      <T.Group position={lightPos}>
+        <!-- Visible sun sphere -->
+        <T is={sunMesh}>
+          <T.SphereGeometry args={[0.6, 32, 32]} />
+          <T.MeshBasicMaterial color={lightColor} toneMapped={false} />
+        </T>
+
+        <T.DirectionalLight
+          castShadow
+          position={lightPos}
+          intensity={lightIntensity}
+          color={lightColor}
+          {target}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-bias={-0.0002}
+          shadow-normalBias={0.02}
+          shadow-camera-left={-6}
+          shadow-camera-right={6}
+          shadow-camera-top={6}
+          shadow-camera-bottom={-6}
+          shadow-camera-near={0.1}
+          shadow-camera-far={20}
+        />
+      </T.Group>
+
+      <T.HemisphereLight
+        intensity={hemiIntensity}
+        skyColor={hemiSkyColor}
+        groundColor={hemiGroundColor}
       />
     </Canvas>
   </div>

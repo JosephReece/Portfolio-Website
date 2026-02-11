@@ -4,6 +4,7 @@
   import { currentView, tooltip, type Vector } from "$lib/view";
   import { Spring } from "svelte/motion";
   import { MathUtils } from "three";
+  import { setShadows } from "$lib/utils";
 
   let { scene = $bindable() } = $props();
 
@@ -26,7 +27,7 @@
     rook: {
       title: "Chess & Poker",
       description:
-        "I spend way too much time on chess; I've hit 2000 Elo online and would love to chase a title eventually. I'm into poker for the same reason, it's fun with friends, but that doesn't stop me from geeking out over the strategy and maths behing it too."
+        "I spend way too much time on chess; I've hit 2000 Elo online and would love to chase a title eventually. I'm into poker for the same reason, it's fun with friends, but that doesn't stop me from geeking out over the strategy and maths behing it too.",
     },
     text: {
       title: "Languages",
@@ -68,6 +69,10 @@
 
       hoverReady = true;
     }
+  });
+
+  $effect(() => {
+    setShadows(node);
   });
 
   const lift = {
