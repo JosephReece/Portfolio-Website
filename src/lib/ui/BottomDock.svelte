@@ -34,7 +34,7 @@
     <div
       class="bg-black/60 backdrop-blur-2xl border border-white/15
              text-white rounded-2xl px-12 py-10
-             shadow-[0_-20px_80px_rgba(0,0,0,0.7)]"
+             shadow-[0_-10px_40px_rgba(0,0,0,0.35)]"
       style="
         opacity: {visibility.current};
         transform: translateY({(1 - visibility.current) * 40}px);

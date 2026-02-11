@@ -11,6 +11,7 @@
   import Education from "./groups/Education.svelte";
   import Contact from "./groups/Contact.svelte";
   import Walls from "./groups/Walls.svelte";
+  import Furniture from "./groups/Furniture.svelte";
 
   interactivity();
 
@@ -29,6 +30,7 @@
       <Hobbies {scene} />
 
       <Walls {scene} />
+      <Furniture {scene} />
     </T>
   {/await}
 </T.Group>

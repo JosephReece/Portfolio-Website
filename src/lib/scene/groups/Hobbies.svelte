@@ -113,8 +113,6 @@
   const WOBBLE_SPEED = 0.0025;
 
   function hover(name: HoverName) {
-    if (!focused) return;
-
     if (!hoverQueue.includes(name)) {
       hoverQueue = [...hoverQueue, name];
     }
