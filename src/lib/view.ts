@@ -4,12 +4,11 @@ import { writable } from 'svelte/store'
 export type Vector = [number, number, number];
 export type View = 'home' | 'projects' | 'careers' | 'education' | 'contact' | 'hobbies'; // 'technical-skills' | 'about-me'
 
-export const OFFICE_PATH = "/3D voxel Office pack/glb";
-export const CHESS_PATH = "/3D voxel Chess pack/glb";
-
 export const loadingProgress = writable<number>(0);
-
 export const currentView = writable<View>('home');
+
+export const tooltip = writable<{ title: string; description: string } | null>(null);
+
 export const lightOn = writable<boolean>(true);
 
 export const groupings: Record<View, { label: string, position: Vector; target: Vector }> = {
@@ -45,7 +44,7 @@ export const groupings: Record<View, { label: string, position: Vector; target: 
 
     contact: {
         label: "Contact",
-        position: [1.8, 1.6, 5],
-        target: [3.5, 0.9, 4], // seating area
+        position: [1, 1.5, 0.6],
+        target: [-0.5, 0.5, 0.2], // seating area
     },
 };

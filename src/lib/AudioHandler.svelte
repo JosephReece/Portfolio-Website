@@ -32,7 +32,7 @@
     setupAudio();
     context?.resume();
     audio.play();
-    gain?.gain.setTargetAtTime(0.5, context!.currentTime, VOLUME_TIME);
+    gain?.gain.setTargetAtTime(0.1, context!.currentTime, VOLUME_TIME);
   }
 
   $effect(() => {

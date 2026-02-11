@@ -9,6 +9,7 @@
   import Careers from "./groups/Careers.svelte";
   import Hobbies from "./groups/Hobbies.svelte";
   import Education from "./groups/Education.svelte";
+  import Contact from "./groups/Contact.svelte";
 
   interactivity();
 
@@ -28,6 +29,7 @@
 
     <Projects {scene} />
     <Education {scene} />
+    <Contact {scene} />
     <Careers {scene} />
     <Hobbies {scene} />
 

@@ -13,6 +13,7 @@
 
   import { loadingProgress } from "$lib/view";
   import AudioHandler from "$lib/AudioHandler.svelte";
+  import BottomDock from "$lib/ui/BottomDock.svelte";
 
   let audioHandler: AudioHandler;
   let entered = $state(false);
@@ -44,6 +45,7 @@
   onMount(async () => {
     mounted = true;
 
+    // Loaded client-side only — NumberFlow accesses DOM globals and crashes Cloudflare Workers SSR
     const mod = await import("@number-flow/svelte");
     NumberFlowComponent = mod.default as any;
   });
@@ -58,7 +60,7 @@
 
 <AudioHandler bind:this={audioHandler} />
 
-<div class="relative w-full h-screen bg-black select-none">
+<div class="relative w-full h-screen bg-black select-none" id="main">
   {#if !entered}
     <div
       out:fade={{ duration: 600 }}
@@ -115,9 +117,8 @@
     </div>
   {/if}
 
-  <div class="fixed top-4 right-4 z-10 select-none">
-    <ViewDropdown />
-  </div>
+  <BottomDock />
+  <ViewDropdown />
 
   <div class="w-full h-full">
     <Canvas>
