@@ -2,7 +2,7 @@
   import { T } from "@threlte/core";
   import { interactivity } from "@threlte/extras";
   import { Spring } from "svelte/motion";
-  import { currentView } from "$lib/view";
+  import { changeView, currentView } from "$lib/view";
 
   interactivity();
 
@@ -13,7 +13,7 @@
 
   function handleClick(e: MouseEvent) {
     e.stopPropagation();
-    currentView.set(view === $currentView ? "home" : view);
+    changeView(view === $currentView ? "home" : view);
 
     scale.target = 1;
     hover.target = 0;

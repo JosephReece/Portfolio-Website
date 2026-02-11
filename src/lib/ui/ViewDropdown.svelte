@@ -2,7 +2,7 @@
   import { fly, fade } from "svelte/transition";
   import { cubicOut } from "svelte/easing";
   import { ChevronDown } from "lucide-svelte";
-  import { currentView, groupings, type View } from "$lib/view";
+  import { changeView, currentView, groupings, type View } from "$lib/view";
 
   let isOpen = $state(false);
   let selectedLabel = $state("");
@@ -13,7 +13,7 @@
   }));
 
   function handleSelect(value: View) {
-    currentView.set(value);
+    changeView(value);
     isOpen = false;
   }
 

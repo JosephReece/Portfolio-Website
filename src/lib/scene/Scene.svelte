@@ -3,7 +3,7 @@
   import { useGltf, interactivity, useProgress } from "@threlte/extras";
   import { MathUtils, type Object3D } from "three";
 
-  import { type View, currentView, loadingProgress } from "$lib/view";
+  import { type View, changeView, currentView, loadingProgress } from "$lib/view";
 
   import Projects from "./groups/Projects.svelte";
   import Careers from "./groups/Careers.svelte";
@@ -12,11 +12,6 @@
   import Contact from "./groups/Contact.svelte";
 
   interactivity();
-
-  export function goTo(view: View) {
-    const newView = view === $currentView ? "home" : view;
-    currentView.set(newView);
-  }
 
   const { progress } = useProgress();
   progress.subscribe((progress) => loadingProgress.set(progress));

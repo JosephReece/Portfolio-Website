@@ -26,7 +26,7 @@
     rook: {
       title: "Chess & Poker",
       description:
-        "I love chess; currently sitting at the 2000 online elo mark. I hope one day to be a titled player. I am also quite fond of poker, it's fun socially, but I really enjoy the strategy and maths behind it too.",
+        "I spend way too much time on chess; I've hit 2000 Elo online and would love to chase a title eventually. I'm into poker for the same reason, it's fun with friends, but that doesn't stop me from geeking out over the strategy and maths behing it too."
     },
     text: {
       title: "Languages",
@@ -67,12 +67,6 @@
       }
 
       hoverReady = true;
-    }
-  });
-
-  $effect(() => {
-    if (!focused) {
-      hoverQueue = [];
     }
   });
 
@@ -130,7 +124,7 @@
     names.forEach((name) => {
       const isActive = activeHover === name;
 
-      if (isActive) {
+      if (isActive && focused) {
         tooltip.set(tooltipDetails[name]);
         lift[name].target = HOVER_HEIGHT;
         wobble[name].target = 1;
@@ -143,7 +137,7 @@
       }
     });
 
-    if (!activeHover) {
+    if (!(activeHover && focused)) {
       tooltip.set(null);
     }
   });
